@@ -4,10 +4,6 @@ const backgroundColor = Array.from(document.querySelectorAll('.book__control_bac
 const bookControl = document.querySelector('.book__controls');
 const book = document.getElementById('book');
 
-console.log(colorText);
-console.log(fontSize);
-console.log(backgroundColor);
-
 bookControl.onclick = function() {
     return false;
 }
