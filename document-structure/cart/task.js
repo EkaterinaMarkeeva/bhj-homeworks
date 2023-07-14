@@ -24,28 +24,21 @@ for (let elem of btnPluses) {
 
 for (let i = 0; i < productAdd.length; i += 1) {
     productAdd[i].addEventListener('click', function() {
+      if (Number(productQuantityValue[i].textContent) === 0) return;
       cartProducts.insertAdjacentHTML('beforeEnd', '<div class="cart__product"><img class="cart__product-image"><div class="cart__product-count"></div></div>');
       
       const cartsProduct = Array.from(document.querySelectorAll('.cart__product'));
       const cartProductImages = Array.from(document.querySelectorAll('.cart__product-image'));
       const cartProductCounts = Array.from(document.querySelectorAll('.cart__product-count'));
-      let findCard;
-      let index;
-  
-      for (let k = 0; k < cartsProduct.length; k += 1) {
-        if (cartsProduct[k].getAttribute('data-id') === products[i].getAttribute('data-id')) {
-          findCard = cartsProduct[k];
-          index = k;
-        }
-      }
-        
-        if (findCard) {
-          cartProductCounts[index].textContent = Number(cartProductCounts[index].textContent) + Number(productQuantityValue[i].textContent);
+      const productInCard = cartsProduct.find((product) => product.getAttribute('data-id') === products[i].getAttribute('data-id'));
+
+        if (productInCard) {
+          productInCard.querySelector('.cart__product-count').textContent = Number(productInCard.textContent) + Number(productQuantityValue[i].textContent);
           cartsProduct[cartsProduct.length - 1].remove();
         } else {
-          cartsProduct[cartsProduct.length - 1].dataset.id = products[i].getAttribute('data-id');
-          cartProductImages[cartProductImages.length - 1].src = productImages[i].src;
-          cartProductCounts[cartProductCounts.length - 1].textContent = productQuantityValue[i].textContent;
+        cartsProduct[cartsProduct.length - 1].dataset.id = products[i].getAttribute('data-id');
+        cartProductImages[cartProductImages.length - 1].src = productImages[i].src;
+        cartProductCounts[cartProductCounts.length - 1].textContent = productQuantityValue[i].textContent;
         }
     })
   }

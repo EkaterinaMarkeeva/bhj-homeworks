@@ -6,17 +6,20 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
   tasksList.insertAdjacentHTML('beforeEnd', '<div class="task"><div class="task__title"></div><a href="#" class="task__remove">&times;</a></div>');
   
-  const taskTitles = Array.from(document.querySelectorAll('.task__title'));
-  taskTitles[taskTitles.length - 1].textContent = taskInput.value;
-  
+  const taskTitles = Array.from(document.querySelectorAll('.task__title'));  
   const tasks = Array.from(document.querySelectorAll('.task'));
   const taskRemoves = Array.from(document.querySelectorAll('.task__remove'));
-  
-  for (let i = 0; i < tasks.length; i += 1) {
-    taskRemoves[i].addEventListener('click', () => {
-      tasks[i].remove();
-    });
+  let titles = taskInput.value.trim();
+
+  if (titles.length > 0) {
+    taskTitles[taskTitles.length - 1].textContent = titles;
+  } else {
+    tasks[tasks.length - 1].remove();
   }
+  
+  taskRemoves[taskTitles.length - 1].addEventListener('click', () => {
+    tasks[taskTitles.length - 1].remove();
+  });
 
   form.reset();
 });
