@@ -9,3 +9,15 @@ body {
 .poll__title {
   margin-bottom: 20px;
 }
+
+.stat {
+  display: flex;
+}
+
+.stat__answer {
+  margin-right: 5px;
+}
+
+.stat__votes {
+  font-weight: bold;
+}
